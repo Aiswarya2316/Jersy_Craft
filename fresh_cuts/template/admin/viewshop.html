@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Fresh Cuts</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+ <iframe allow="join-ad-interest-group" data-tagging-id="AW-797221335" data-load-time="1726599499997" height="0" width="0" src="https://td.doubleclick.net/td/rul/797221335?random=1726599499990&amp;cv=11&amp;fst=1726599499990&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be4990v9101312129z879813278za200zb79813278&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=0&amp;u_w=1280&amp;u_h=720&amp;url=https%3A%2F%2Fnicepage.com%2Fhtml-templates%2Fpreview%2Fsweet-chicken-3791646%3Fdevice%3Ddesktop&amp;ref=https%3A%2F%2Fnicepage.com%2Fht%2F3791646%2Fsweet-chicken-html-template&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Sweet%20chicken%20HTML%20Template%20Live%20Demo&amp;npa=0&amp;pscdl=noapi&amp;auid=954029643.1726599416&amp;uaa=x86&amp;uab=64&amp;uafvl=Chromium%3B128.0.6613.138%7CNot%253BA%253DBrand%3B24.0.0.0%7CGoogle%2520Chrome%3B128.0.6613.138&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=15.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config" style="display: none; visibility: hidden;"></iframe>
+<style>
+
+/* nav */
+
+
+
+.nav-link:hover{
+        color: rgb(222, 247, 34);
+    }
+
+
+.navbar .nav-link {
+  transition: color 0.3s; /
+}
+
+.navbar .nav-link:hover {
+  color: #ffdd57; 
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); 
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom color for toggler icon */
+}
+#nav{
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  height: 80px;
+  margin: -20px -20px-20px 0;
+  
+}
+
+
+
+
+/* body */
+
+
+.gallery {
+    /* display: flex;
+    flex-wrap: wrap; */
+    /* gap: 20px; */
+    width:300px;
+    float: left;
+    margin-left: 100px;
+    padding-top: 5px;
+    margin-top: 100px;
+    /* height:80px;  */
+
+    /* justify-content: center; */
+}
+h3{
+    text-align: center;
+    text-shadow: #301803;
+}
+
+.product {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.product img {
+  min-width: 250px;
+  min-height: 300px;
+  max-width: 250px;
+  max-height: 300px;
+    /* width: 150px;
+    height: 150px; */
+    display: block;
+}
+
+.product .description {
+    padding: 15px;
+}
+
+.product h3 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.product .price {
+    font-size: 16px;
+    color: #e67e22;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.product .details {
+    font-size: 14px;
+    color: #777;
+}
+
+.product:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.pro{
+  color:black;
+  border:1px solid rgb(41, 103, 196);
+  margin:20px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+
+
+  <nav id="nav" class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a href="../adminhome" class="logo">
+        <img src="static/logo_new-removebg-preview.png" alt="logo" width="150px">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../viewshop">View Shop</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="../admin_feedback">Feed Back</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="../logout">Logout</a>
+          </li>
+        </ul>
+          
+        <!-- <form class="d-flex" method="get" action="{% url 'product_search' %}">
+          <input class="form-control me-2"  type="text" name="query" placeholder="Search for products...">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form> -->
+      </div>
+    </div>
+  </nav>
+  
+
+<div class="container-fluid mt-3">
+  <h3>shops</h3>
+  
+</div>
+{% for i in data %}
+<div class="gallery">
+  <div class="product">
+    <div class="col-lg-3 col-md-6 col-sm-12"></div>
+      <!-- <img src="{{i.image.url}}" alt="Product 1"> -->
+      <div class="description">
+          <h3>{{i.name}}</h3>
+          <p class="price">Email: {{i.Email}}</p>
+          <p class="quantity">Contact: {{i.phonenumber}}</p>
+          <p class="quantity">Location: {{i.location}}</p>
+
+         
+      </div>
+  </div>
+</div>
+{% endfor %}
+</body>
+</html>
+
+

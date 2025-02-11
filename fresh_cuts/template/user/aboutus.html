@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Fresh Cuts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        #nav{
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        height: 80px;
+        margin: -20px -20px-20px 0;
+        
+        }
+        .navbar .nav-link:hover {
+            color: #ffdd57; /* Change color on hover */
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 1200px;
+        }
+
+        p, ol li {
+            line-height: 1.8;
+            font-size: 1rem;
+            color: #495057;
+        }
+
+        #map iframe {
+            border-radius: 10px;
+        }
+
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .highlight {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .contact-info li {
+            margin-bottom: 10px;
+        }
+
+        #about{
+          color: white;
+          margin-bottom: 0px;
+          height: 50px;
+
+        }        
+
+        .hero-image {
+            /* margin-top: 100px;           */
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            /* border-radius: 10px; */
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p, ol li {
+                font-size: 0.9rem;
+            }
+
+            #map iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a href="../userhome" class="logo">
+                <img src="static/logo_new-removebg-preview.png" alt="logo" width="150px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="../userviewproduct">View Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../orderdetails">Order Details</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../user_view_cart">My Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../aboutus">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../service">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../profile">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
+                </ul>
+                <form class="d-flex" method="get" action="{% url 'product_search' %}">
+                    <input class="form-control me-2" type="text" name="query" placeholder="Search for products...">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Image -->
+    <h2 class="bg-dark" id="about">ABOUT US</h2>
+    <div>
+        <img src="static\home img-overlay(2).png" alt="Fresh Meat" class="hero-image">
+    </div>
+
+    <!-- About Us Section -->
+    <section>
+        <h2>Who We Are</h2>
+        <p>At <span class="highlight">Fresh Cuts</span>, we are dedicated to delivering the highest-quality meats and fresh produce to our customers. Our mission is to exceed expectations through exceptional service and top-notch quality. We strive to be your trusted partner in enjoying fresh, healthy meals every day.</p>
+    </section>
+
+    <!-- Map Section -->
+    <section>
+        <h2>Our Location</h2>
+        <div id="map">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093946!2d144.95373531531658!3d-37.81627997975148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0b12345f%3A0x1234567890abcdef!2sYour%20Location!5e0!3m2!1sen!2sau!4v1635721087053!5m2!1sen!2sau" 
+                width="100%" 
+                height="400" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section>
+        <h2>Contact Us</h2>
+        <p>If you have any questions or inquiries, feel free to reach out to us:</p>
+        <ol class="contact-info">
+            <li>Email: <span class="highlight">info@example.com</span></li>
+            <li>Phone: <span class="highlight">(123) 456-7890</span></li>
+            <li>Address: <span class="highlight">123 Main Street, City, Country</span></li>
+        </ol>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Fresh Cuts. All rights reserved.</p>
+    </footer>
+</body>
+</html>

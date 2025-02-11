@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        /* Navbar styling */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #575757;
+        }
+        .navbar-right {
+            float: right;
+        }
+
+        /* Order details container */
+        .order-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .order-details {
+            margin-bottom: 20px;
+        }
+        .order-details p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        /* .order-summary {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .order-summary span {
+            float: right;
+        }
+        .card{
+      float: left;
+      width: 300px;
+      margin-left: 100PX;
+      /* margin: auto; */
+        /* padding: 0px;
+      margin-top: 6px;
+    }  */ */
+
+    .pro{
+  background-color: rgb(81, 10, 222);
+  color: rgb(236, 228, 228);
+  border: 2px solid rgb(81, 10, 222);
+  margin: 20PX;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+.card {
+            display: flex;
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .card .left, .card .right {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .card .divider {
+            width: 2px;
+            background-color: #ddd;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="../userhome">Home</a>
+        <a href="../viewproduct">Products</a>
+        <a href="../cart">Cart</a>
+        <a href="../order_details" class="active">Order Details</a>
+        <div class="navbar-right">
+            <a href="../profile">My Account</a>
+            <a href="../logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- Order Details Container -->
+    {% for i in data %}
+    <div class="card">
+        <div class="left">
+            <h2>product</h2>
+            <img src="{{i.product.image.url}}" alt="Product 1" width="50%" height="50%">
+            <p><strong>Product name :</strong> {{i.product.name}}</p>
+            <p><strong>Order Date:</strong> {{i.date_of_buying}}</p>
+            <p><strong>Shipping Address:</strong> {{i.user.location}}</p>
+            <p><strong>Payment Method:</strong>{{i.buy.user_id}}</p>
+        </div>
+        <div class="divider"></div>
+        <div class="right">
+            <h2>Delivery</h2>
+            <p><strong>Product name :</strong> {{i.product.name}}</p>
+            <p><strong>Order Date:</strong> {{i.date_of_buying}}</p>
+            <p><strong>Shipping Address:</strong> {{i.user.location}}</p>
+            <p><strong>Payment Method:</strong>{{i.buy.user_id}}</p>
+            <a href="../order_details">Delivery</a>
+        </div>
+    </div>
+
+
+    <!-- <div class="container">
+        <div class="card">
+            <h2>Delivery</h2>
+            <p><strong>Product name :</strong> {{i.product.name}}</p>
+            <p><strong>Order Date:</strong> {{i.date_of_buying}}</p>
+            <p><strong>Shipping Address:</strong> {{i.user.location}}</p>
+            <p><strong>Payment Method:</strong>{{i.buy.user_id}}</p>
+        </div>
+        <div class="card">
+            <h2>product</h2>
+            <img src="{{i.product.image.url}}" alt="Product 1" width="50%" height="50%">
+            <p><strong>Product name :</strong> {{i.product.name}}</p>
+            <p><strong>Order Date:</strong> {{i.date_of_buying}}</p>
+            <p><strong>Shipping Address:</strong> {{i.user.location}}</p>
+            <p><strong>Payment Method:</strong>{{i.buy.user_id}}</p>
+        </div>
+    </div> -->
+    
+    <!-- <div class="order-container">
+        <h2>Delivery</h2>
+        <div class="order-details">
+            <p><strong>Product name :</strong> {{i.product.name}}</p>
+            <p><strong>Order Date:</strong> {{i.date_of_buying}}</p>
+            <p><strong>Shipping Address:</strong> {{i.user.location}}</p>
+            <p><strong>Payment Method:</strong>{{i.buy.user_id}}</p>
+        </div> -->
+
+        <!-- <div class="order-summary">
+            <p>Product 1 <span>$20.00</span></p>
+            <p>Product 2 <span>$15.00</span></p>
+            <p>Shipping <span>$5.00</span></p>
+            <hr>
+            <p>Total <span>$40.00</span></p>
+        </div> -->
+    <!-- </div> -->
+    {% endfor %}
+
+   
+</body>
+</html>

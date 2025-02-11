@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Fresh Cuts - Product Display</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+   /* nav */
+
+
+
+.nav-link:hover{
+        color: rgb(222, 247, 34);
+    }
+
+
+.navbar .nav-link {
+  transition: color 0.3s; /
+}
+
+.navbar .nav-link:hover {
+  color: #ffdd57; /* Change color on hover */
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); /* Light border for toggler */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom color for toggler icon */
+}
+#nav{
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  height: 80px;
+  margin: -20px -20px-20px 0;
+  
+}
+
+    h3 {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .product-card {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card .card-body {
+      padding: 15px;
+    }
+
+    .product-card h5 {
+      font-size: 18px;
+      margin: 0 0 10px 0;
+      color: #333;
+    }
+
+    .product-card .price {
+      font-size: 16px;
+      color: #e67e22;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .product-card .btn {
+      margin-top: 10px;
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .dropdown {
+      margin-bottom: 20px;
+    }
+
+    .dropdown-menu {
+      width: 100%;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: white;
+      font-size: 14px;
+    }
+
+    /* @media (max-width: 768px) {
+      .product-card img {
+        height: 150px;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+    } */
+    @media only screen and (max-width: 992px) {
+        /* #carouselh2 {
+            width: 200px;
+            margin-left: 25%;
+            top:-400px;
+            font-size: large;
+        } */
+        /* #carouselbtn {
+          margin: 100px 0 0 130px; 
+        } */
+        #mynavbar {
+          background-color: #2c2727;
+          padding: 10px;
+
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        /* #carouselh2 {
+            width: 200px;
+            top:-240px;
+            font-size: medium;
+        } */
+        h3 input[type=buttont] {
+            margin-left: 25%;
+            margin-top: 20px;
+        }
+        /* #carouselbtn {
+          margin: 100px 0 0 100px; 
+        } */
+        #order_dtls{
+          min-height: 500px;
+        }
+        #cart_dtls{
+          height: 650px;
+        }
+        #mynavbar {
+          background-color: #2c2727;
+
+        }
+    }
+
+    /* Responsiveness */
+
+  </style>
+</head>
+<body>
+
+<nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <a href="../userhome" class="navbar-brand">
+      <img src="static/logo_new-removebg-preview.png" alt="logo" width="150px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="../userviewproduct">View Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="../orderdetails">Order Details</a></li>
+        <li class="nav-item"><a class="nav-link" href="../user_view_cart">My Cart</a></li>
+        <li class="nav-item"><a class="nav-link" href="../aboutus">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="../service">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="../contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="../profile">Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
+      </ul>
+      <form class="d-flex" method="get" action="{% url 'product_search' %}">
+        <input class="form-control me-2" type="text" name="query" placeholder="Search for products...">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <h3>Our Products: {{ category.name }}</h3>
+
+  <!-- Dropdown for categories -->
+  <div class="dropdown text-center">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Select Category
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">All</a></li>
+      <li><a class="dropdown-item" href="#">Birds</a></li>
+      <li><a class="dropdown-item" href="#">Animals</a></li>
+      <li><a class="dropdown-item" href="#">Fish</a></li>
+    </ul>
+  </div>
+
+    <!-- <select name="category">
+    {% for data1 in data %}
+        select<option value="{{ data1.category }}">{{ data1.category }}</option>
+    {% endfor %}
+</select> -->
+
+  <!-- Product Grid -->
+  <div class="row">
+    {% for i in data %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+      <div class="product-card">
+        <img src="{{ i.image.url }}" alt="Product {{ i.name }}">
+        <div class="card-body">
+          <h5>Product: {{ i.name }}</h5>
+          <p class="price">Price: ₹{{ i.price }}/kg</p>
+          <div>
+            <a href="../prodetails/{{ i.pk }}" class="btn btn-outline-primary">Details</a>
+            <a href="../addtocart/{{ i.pk }}" class="btn btn-primary">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<footer>
+  © 2024 Fresh Cuts. All Rights Reserved.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

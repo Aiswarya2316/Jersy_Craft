@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Fresh Cuts</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+
+
+/* navbar */
+
+nav-link:hover{
+        color: rgb(222, 247, 34);
+    }
+.navbar .nav-link {
+  transition: color 0.3s; 
+}
+.navbar .nav-link:hover {
+  color: #ffdd57;
+}
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom color for toggler icon */
+}
+#nav{
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  height: 80px;
+  /* margin: -20px -20px-20px 0; */
+  
+}
+
+
+
+
+/* card */
+    .card{
+      float: left;
+      width: 300px;
+      margin-left: 100PX;
+      /* margin: auto; */
+        padding: 0px;
+      margin-top: 6px;
+    } 
+    .pro{
+      background-color: rgb(81, 10, 222);
+      color: rgb(236, 228, 228);
+      border: 2px solid rgb(81, 10, 222);
+      margin: 20PX;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+ <nav id="nav" class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <a href="../viewpro" class="logo">
+      <img src="static/logo_new-removebg-preview.png" alt="logo" width="150px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link"  href="../viewpro">View Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../addpro">Add Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="../bookinghistry">Bookinghistory</a>
+        </li>
+       
+        <li class="nav-item">
+          <a class="nav-link" href="../logout">Logout</a>
+        </li>
+      </ul>
+        
+      <form class="d-flex" method="get" action="{% url 'pro_search' %}">
+        <input class="form-control me-2"  type="text" name="query" placeholder="Search for products...">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+  {% for i in data %}
+  {% for j in i %}
+   
+  
+  <div class="card mb-4">
+    <div class="card-body text-center">
+      <img src="{{j.product.image.url}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;">
+      <h5 class="my-3">Product : {{j.product.name}}</h5>
+      <p class="text-muted mb-1">price : {{j.price}}</p>
+      <p class="text-muted mb-4">Quantity : {{j.quantity}}</p>
+      <p class="text-muted mb-4">Total price :{{j.price}}</p>
+      <p class="text-muted mb-4">customer :{{j.user.name}}</p>
+      <p class="text-muted mb-4">location :{{j.user.location}}</p>
+      <!-- {% if i.del_boy %}
+      
+      <p class="text-muted mb-4">avilable</p>
+      
+      {% else %}
+      <form action="../assigndel/{{i.pk}}" method="post">
+        {% csrf_token %}
+        <select name="delselect" >
+        {% for j in data1 %}
+          <option value="{{j.pk}}">{{j.name}}</option>
+
+          {% endfor %}
+        </select>
+        <input type="submit">
+      </form> 
+      {% endif %}
+  
+    
+      <div class="d-flex justify-content-center mb-2">
+         <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-primary" data-mdb-button-initialized="true">Details</button>
+        <button type="button" data-mdb-button-init="" data-mdb-ripple-init="" class="btn btn-outline-primary ms-1" data-mdb-button-initialized="true">Edit</button> -->
+        
+          
+            <!-- <a class="pro" href="../prodetails/{{i.pk}}">Details</a>
+          
+            <a class="pro" href="../proupdate/{{i.pk}}">Edit</a>
+          -->
+         
+        <!-- </div> -->
+    </div>
+  </div>
+  {% endfor %}
+  {% endfor %} 
+
+</body>
+</html>

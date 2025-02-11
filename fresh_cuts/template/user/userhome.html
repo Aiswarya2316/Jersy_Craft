@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Fresh Cuts</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+ <iframe allow="join-ad-interest-group" data-tagging-id="AW-797221335" data-load-time="1726599499997" height="0" width="0" src="https://td.doubleclick.net/td/rul/797221335?random=1726599499990&amp;cv=11&amp;fst=1726599499990&amp;fmt=3&amp;bg=ffffff&amp;guid=ON&amp;async=1&amp;gtm=45be4990v9101312129z879813278za200zb79813278&amp;gcd=13t3t3t3t5l1&amp;dma=0&amp;tag_exp=0&amp;u_w=1280&amp;u_h=720&amp;url=https%3A%2F%2Fnicepage.com%2Fhtml-templates%2Fpreview%2Fsweet-chicken-3791646%3Fdevice%3Ddesktop&amp;ref=https%3A%2F%2Fnicepage.com%2Fht%2F3791646%2Fsweet-chicken-html-template&amp;hn=www.googleadservices.com&amp;frm=0&amp;tiba=Sweet%20chicken%20HTML%20Template%20Live%20Demo&amp;npa=0&amp;pscdl=noapi&amp;auid=954029643.1726599416&amp;uaa=x86&amp;uab=64&amp;uafvl=Chromium%3B128.0.6613.138%7CNot%253BA%253DBrand%3B24.0.0.0%7CGoogle%2520Chrome%3B128.0.6613.138&amp;uamb=0&amp;uam=&amp;uap=Windows&amp;uapv=15.0.0&amp;uaw=0&amp;fledge=1&amp;data=event%3Dgtag.config" style="display: none; visibility: hidden;"></iframe>
+<style>
+
+body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }   
+
+/* nav */
+
+
+
+.nav-link:hover{
+        color: rgb(222, 247, 34);
+    }
+
+
+.navbar .nav-link {
+  transition: color 0.3s; /
+}
+
+.navbar .nav-link:hover {
+  color: #ffdd57; /* Change color on hover */
+}
+
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5); /* Light border for toggler */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom color for toggler icon */
+}
+#nav{
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  height: 80px;
+  margin: -20px -20px-20px 0;
+  
+}
+
+/* carousel */
+
+
+
+ .carousel-overlay {
+  position: absolute;
+  top: 0%; 
+  height: 100%;
+  left: 0;
+  width: 50%;
+            background: linear-gradient(90deg, 
+                rgb(14, 14, 14) 5%,   
+                rgba(28, 27, 27, 0.9) 30%, 
+                rgba(18, 18, 18, 0.6) 80%, 
+                rgba(0,0,0,0) 100%     
+            );
+  z-index: 0; 
+  color: white;
+  text-align:left; 
+  padding: 20px; 
+}
+/*
+#carouselh2{
+  margin: 80px 200px 0 50px; 
+  font-size:3cap;
+}
+
+#carouselbtn {
+  padding: 10px 20px;
+  margin: 100px 0 0 300px; 
+} */
+
+
+/* General Carousel Styles */
+.carousel-inner img {
+  object-fit: cover;
+  height: 600px;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.carousel-indicators .active {
+  background-color: #007bff;
+  transform: scale(1.2);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding: 10px;
+}
+
+/* Overlay Styles */
+/* .carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(90deg, rgba(51, 18, 18, 0.9) 0%, rgba(0, 0, 0, 0.5) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 50px;
+  color: white;
+  z-index: 1;
+} */
+
+.carousel-content h2 {
+  margin: 50px;
+  color: #f8f9fa;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.carousel-content .description {
+  margin: 50px;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #f8f9fa;
+}
+
+#carouselbtn {
+  margin-left: 30%;
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  background-color: #007bff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+#carouselbtn:hover {
+  background-color: #0056b3;
+}
+
+
+/* gallery */
+
+.gallery {
+
+    width:300px;
+    float: left;
+    margin-left: 100px;
+    padding-top: 5px;
+    margin-top: 100px;
+    padding-bottom: 100px;
+
+}
+.gallery {
+  float: none;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+/* product display */
+ 
+/* .product {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 250px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+.product img {
+  min-width: 250px;
+  min-height: 300px;
+  max-width: 250px;
+  max-height: 300px;
+
+    display: block;
+}
+.product .description {
+    padding: 15px;
+}
+.product h3 {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+    color: #333;
+}
+.product .price {
+    font-size: 16px;
+    color: #e67e22;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.product .details {
+    font-size: 14px;
+    color: #777;
+} */
+
+/* order details */
+
+#order_dtls {
+  clear: both;
+  padding-top: 30px;
+  width: 90%;
+  overflow: hidden; /* Fix floating overflow */
+  margin-top: 20px;
+  height: 350px;
+  
+}
+.order-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+/* Ensure full-width images in both sections */
+.product img, .order-left img {
+  max-width: 100%;
+  height: auto;
+}
+.order-container {
+  width: 100%; 
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #f8f8f8; 
+  /* max-height: 500px; */
+  /* margin: 300px; */
+}
+.order-left {
+  margin-right: 15px;
+ }
+.order-right p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* cart */
+
+#cart_dtls {
+  clear: both;
+  padding-top: 30px;
+  width: 90%;
+  overflow: hidden; /* Fix floating overflow */
+  margin-top: 20px;
+  height: 400px;
+  /* margin: 10px; */
+}
+
+
+
+/* other */
+
+h2{
+    text-align: center;
+    text-shadow: #301803;
+    font-style:italic ;
+}
+
+
+
+
+
+/* Container Styling */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Product Card */
+.product-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Product Info */
+.product-info {
+  padding: 15px;
+  text-align: center;
+}
+
+.product-info h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.product-info .description {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.product-info .price {
+  font-size: 16px;
+  color: #e67e22;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.actions .btn {
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  color: white;
+  background-color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.actions .btn:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+
+
+
+    /* Ensure container sections have clear floating */
+.container {
+  width: 100%;
+  overflow: hidden; /* Fix floating overflow */
+  margin-top: 20px;
+}
+/* Gallery styling */
+/* Styling for the buttons and links */
+.pro {
+  display: inline-block;
+  margin: 5px 0;
+  color: blue;
+  background-color: white;
+  border: 1px solid rgb(41, 103, 196);
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.pro:hover {
+  color: white;
+  background-color: rgb(41, 103, 196);
+}
+
+
+@media only screen and (max-width: 992px) {
+        /* #carouselh2 {
+            width: 200px;
+            margin-left: 25%;
+            top:-400px;
+            font-size: large;
+        } */
+        /* #carouselbtn {
+          margin: 100px 0 0 130px; 
+        } */
+        #mynavbar {
+          background-color: #2c2727;
+          padding: 10px;
+
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        /* #carouselh2 {
+            width: 200px;
+            top:-240px;
+            font-size: medium;
+        } */
+        h3 input[type=buttont] {
+            margin-left: 25%;
+            margin-top: 20px;
+        }
+        /* #carouselbtn {
+          margin: 100px 0 0 100px; 
+        } */
+        #order_dtls{
+          min-height: 500px;
+        }
+        #cart_dtls{
+          height: 650px;
+        }
+        #mynavbar {
+          background-color: #2c2727;
+
+        }
+    }
+
+    /* Responsiveness */
+@media only screen and (max-width: 992px) {
+  .carousel-overlay {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  .carousel-content h2 {
+    font-size: 2rem;
+  }
+  .carousel-content .description {
+    font-size: 1rem;
+  }
+  #carouselbtn {
+    font-size: 1rem;
+    margin-left: 5%;
+    margin-top: 100px;
+
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .carousel-content h2 {
+    font-size: 1.8rem;
+  }
+  .carousel-content .description {
+    font-size: 0.9rem;
+  }
+  #carouselbtn {
+    font-size: 1rem;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+}
+</style>
+</head>
+<body>
+
+
+
+  <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <a href="../userhome" class="logo">
+        <img src="../static/logo_new-removebg-preview.png" alt="logo" width="150px">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../userviewproduct">View Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../orderdetails">Order Details</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../user_view_cart">My Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../aboutus">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../service">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../logout">Logout</a>
+          </li>
+        </ul>
+          
+        <form class="d-flex" method="get" action="{% url 'product_search' %}">
+          <input class="form-control me-2"  type="text" name="query" placeholder="Search for products...">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+  <div id="demo" class="carousel slide" data-bs-ride="carousel">
+    <!-- Indicators/Dots -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    </div>
+  
+    <!-- The Slideshow/Carousel -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="../static/five-raw-wagyu-steak-cuts-garnished-with-rosemary-peppercorns-arranged-black-slate_946823-7859.jpg" alt="Los Angeles" class="d-block w-100" style="height: 600px; object-fit: cover;">
+      </div>
+      <div class="carousel-item">
+        <img src="../static/chicken1_16_9.jpg" alt="Chicago" class="d-block w-100" style="height: 600px; object-fit: cover;">
+      </div>
+      <div class="carousel-item">
+        <img src="../static/fish1.jpg" alt="New York" class="d-block w-100" style="height: 600px; object-fit: cover;">
+      </div>
+    </div>
+  
+    <!-- Left and Right Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  
+    <!-- Overlay Content -->
+    <div class="carousel-overlay">
+      <div class="carousel-content">
+        <h2>At Fresh Cut, we pride ourselves on delivering the finest quality meats straight to your doorstep.</h2>
+        <p class="description">Our selection includes succulent steaks, tender poultry, and fresh seafood.</p>
+        <a id="carouselbtn" class="btn btn-primary" href="../userviewproduct">Shop Now</a>
+      </div>
+    </div>
+  </div>
+  
+    
+
+
+  <!-- <div class="container">
+    <h2>Our New Fresh Meats</h2>
+    <div class="row">
+      {% for i in data %}
+      <div class="col-md-6 col-lg-3  col-sm-12 mb-4">
+        <div class="gallery">
+          <div class="product">
+            <img src="{{i.image.url}}" alt="Product Image">
+            <div class="description">
+              <h3>Product: {{i.name}}</h3>
+              <p class="price">{{i.discription}}</p>
+              <p class="quantity">Rs: {{i.price}}/ Kg</p>
+              <a class="pro" style="padding: 5px;" href="../prodetails/{{i.pk}}">Details</a>
+              <a class="pro" style="padding: 5px;" href="../addtocart/{{i.pk}}">Add to cart</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div> -->
+  
+  <div class="container">
+    <h2>Our New Fresh Meats</h2>
+    <div class="product-grid">
+      {% for i in data %}
+      <div class="product-card">
+        <img src="{{i.image.url}}" alt="Product Image">
+        <div class="product-info">
+          <h3>{{i.name}}</h3>
+          <p class="description">{{i.discription}}</p>
+          <p class="price">Rs: {{i.price}} / Kg</p>
+          <div class="actions">
+            <a href="../prodetails/{{i.pk}}" class="btn">Details</a>
+            <a href="../addtocart/{{i.pk}}" class="btn">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  
+
+  <div class="container" id="order_dtls">
+    <h2 class="text-center">Order Details</h2>
+    <div class="row"> 
+        {% for i in data1 %}
+        <div class="col-md-6 col-lg-6  col-sm-12 mb-4">
+            <div class="order-container"> 
+                <div class="order-row d-flex align-items-center">
+                    <div class="order-left">
+                        <img src="{{i.product.image.url}}" alt="Product Image" class="img-fluid"  style="width: 150px;height: 150px;">
+                    </div>
+                    <div class="order-right">
+                        <p><strong>Product name:</strong> {{i.product.name}}</p>
+                        <p><strong>Order Date:</strong> {{i.date_of_buying}}</p>
+                        <p><strong>Shipping Address:</strong> {{i.user.location}}</p>
+                        <p><strong>Payment Method:</strong> {{ i.delivery_status }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+  <!-- Cart Section -->
+<!-- Cart Section -->
+{% if data2 %}
+<div class="container" id="cart_dtls">
+  <h2>Our Cart</h2>
+  <div class="row"> 
+    {% for i in data2 %}
+    <div class="col-md-6">
+      <div class="order-container"> 
+        <div class="order-row d-flex align-items-center">
+          <div class="order-left">
+            <img src="{{i.product.image.url}}" alt="Product Image" class="rounded-circle img-fluid" style="width: 150px;height: 150px;">
+          </div>
+          <div class="order-right">
+            <h5 class="my-3">Product Name: {{i.product.name}}</h5>
+            <p class="text-muted mb-1">Price: {{i.product.price}}</p>
+            <!-- <a href="../qty_incri/{{i.pk}}" class="btn">+</a> -->
+            <p class="text-muted mb-4">Quantity: {{i.quantity}}kg</p>
+            <!-- <a href="../qty_decri/{{i.pk}}" class="btn">-</a> -->
+            <div class="d-flex justify-content-center mb-2">
+              <a class="btn btn-primary" style="margin: 10px;" href="../buynow/{{i.pk}}">Buy now</a>
+              <a class="btn btn-primary" style="margin: 10px;" href="../prodetails/{{i.product.pk}}">Details</a>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+  <p>No items in cart</p>
+{% endif %}
+
+
+
+  <div class="home_img">
+      <img src="static/home img-overlay(3).png" width="100%" height="100%" >
+  </div>
+  <div class="container-fluid p-5  bg-dark text-white footer" >
+    <table >
+      <thead>
+        <tr>
+          <img class="n_1521092598.avif" src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/n_1521092598.avif" alt="" >
+          <th><b>Solutions</b><br><br>
+                      My account<br>
+                      Track Your Order<br>
+                      Order History<br>
+                      Payment Methods<br>
+                      Privacy Policy<br>
+          </th>
+          <th><b>About Us</b><br><br>
+                      Terms & Conditions<br>
+                      Privacy Policy<br>
+                      Return Policy<br>
+                      Site Map
+          </th>
+          <th><b>Contact Us</b><br><br>
+                    <a> <i class="material-icons">map</i> Kureekkadu, Ernakulam, Kerala </a><br>
+                    <a> <i class="material-icons">phone</i> +91-86065 70657</a><br>
+                    <a> <i class="material-icons">clock</i>  Mon - Sat / 9:00AM - 6:00PM</a></th>
+          </tr>
+      </thead>
+    </table>
+  </div>
+</body>
+</html>

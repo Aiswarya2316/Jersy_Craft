@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile | Fresh Cuts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Navbar styling */
+        #nav {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            height: 80px;
+            margin: -20px -20px 20px 0;
+        }
+        
+        .navbar .nav-link:hover {
+            color: #ffdd57;
+        }
+        
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+        
+        /* Form card styling */
+        .form-container {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            margin: 30px auto;
+            font-family: Arial, sans-serif;
+        }
+        
+        .form-container h3 {
+            color: #343a40;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-container label {
+            font-size: 16px;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .form-container input[type="text"],
+        .form-container input[type="tel"],
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            display: inline-block;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .form-container input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        
+        .form-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        
+        .alert {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            #mynavbar {
+              background-color: #2c2727;
+
+            }
+            .form-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a href="../userhome" class="logo">
+                <img src="static/logo_new-removebg-preview.png" alt="logo" width="150px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="../userviewproduct">View Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../orderdetails">Order Details</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../user_view_cart">My Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../aboutus">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../service">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../profile">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
+                </ul>
+                <form class="d-flex" method="get" action="{% url 'product_search' %}">
+                    <input class="form-control me-2" type="text" name="query" placeholder="Search for products...">
+                    <button class="btn btn-primary" id="searchbtn" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Update Form -->
+    <div class="form-container">
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3>Update Profile</h3>
+            <div class="mb-3">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="{{data.name}}" placeholder="Enter your name">
+            </div>
+            <div class="mb-3">
+                <label for="phonenumber">Contact</label>
+                <input type="tel" id="phonenumber" name="phonenumber" value="{{data.phonenumber}}" placeholder="Enter your phone number">
+            </div>
+            <div class="mb-3">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" value="{{data.location}}" placeholder="Enter your location">
+            </div>
+            <input type="submit" value="Update Profile">
+        </form>
+    </div>
+</body>
+</html>
