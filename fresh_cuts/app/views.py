@@ -456,40 +456,22 @@ def order_payment(request, id):
             request,
             "user/payment.html",
             {
-                "callback_url": "http://" + "127.0.0.1:8000" + "/razorpay/callback",
-                "razorpay_key": settings.RAZORPAY_KEY_ID,
-                "order": order,
-                "product": product,  # Pass product data to the template
+            "callback_url": "http://127.0.0.1:8000/razorpay/callback/",  # Add the trailing slash
+            "razorpay_key": settings.RAZORPAY_KEY_ID,
+            "order": order,
+            "product": product,
             },
         )
+
+        
     #  return render(request, "user/payment.html", {"product": product})
 
 
 
-# def order_payment(request):
-#     if request.method == "POST":
-#         name = request.POST.get("name")
-#         amount = request.POST.get("amount")
-#         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-#         razorpay_order = client.order.create(
-#             {"amount": int(amount) * 100, "currency": "INR", "payment_capture": "1"}
-#         )
-#         order_id=razorpay_order['id']
-#         order = Order.objects.create(
-#             name=name, amount=amount, provider_order_id=order_id
-#         )
-#         order.save()
-#         return render(
-#             request,
-#             "user/payment.html",
-#             {
-#                 "callback_url": "http://" + "127.0.0.1:8000" + "razorpay/callback",
-#                 "razorpay_key": settings.RAZORPAY_KEY_ID,
-#                 "order": order,
-#             },
-#         )
-#     return render(request, "user/payment.html")
 
+import json
+import razorpay
+from django.http import JsonResponse
 
 @csrf_exempt
 def callback(request):
@@ -497,33 +479,41 @@ def callback(request):
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
         return client.utility.verify_payment_signature(response_data)
 
+    print("POST Data:", request.POST)  # Debugging
+
     if "razorpay_signature" in request.POST:
         payment_id = request.POST.get("razorpay_payment_id", "")
         provider_order_id = request.POST.get("razorpay_order_id", "")
         signature_id = request.POST.get("razorpay_signature", "")
+
         order = Order.objects.get(provider_order_id=provider_order_id)
         order.payment_id = payment_id
         order.signature_id = signature_id
         order.save()
-        if not verify_signature(request.POST):
+
+        if verify_signature(request.POST):  # Fix the condition here
             order.status = PaymentStatus.SUCCESS
             order.save()
-            return render(request, "callback.html", context={"status": order.status})   # callback giving html page
-            #  or  return redirect(function name of callback giving html page)
+            messages.success(request, "Payment successful! Your order has been placed.")
         else:
             order.status = PaymentStatus.FAILURE
             order.save()
-            return render(request, "callback.html", context={"status": order.status})  # callback giving html page
-            #  or  return redirect(function name of callback giving html page)
+            messages.error(request, "Payment failed. Invalid signature.")
 
     else:
-        payment_id = json.loads(request.POST.get("error[metadata]")).get("payment_id")
-        provider_order_id = json.loads(request.POST.get("error[metadata]")).get(
-            "order_id"
-        )
-        order = Order.objects.get(provider_order_id=provider_order_id)
-        order.payment_id = payment_id
-        order.status = PaymentStatus.FAILURE
-        order.save()
-        return render(request, "callback.html", context={"status": order.status})  # callback giving html page
-        #  or  return redirect(function name of callback giving html page)
+        try:
+            error_data = json.loads(request.POST.get("error[metadata]", "{}"))
+            payment_id = error_data.get("payment_id")
+            provider_order_id = error_data.get("order_id")
+        except json.JSONDecodeError:
+            payment_id = None
+            provider_order_id = None
+
+        if provider_order_id:
+            order = Order.objects.get(provider_order_id=provider_order_id)
+            order.payment_id = payment_id
+            order.status = PaymentStatus.FAILURE
+            order.save()
+            messages.error(request, "Payment failed. Please try again.")
+
+    return render(request, "callback.html", {"status": order.status})

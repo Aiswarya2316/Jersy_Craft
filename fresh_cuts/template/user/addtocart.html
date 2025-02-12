@@ -155,7 +155,7 @@
     <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <a href="../userhome" class="logo">
-                <img id="logo" src="../static/logo_new-removebg-preview.png" alt="logo" width="150px">
+                <img id="logo" src="../static/attachment_117648875.jpg" alt="logo" width="80px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -186,10 +186,10 @@
         <div class="card-body text-center">
             <img src="{{i.product.image.url}}" alt="Product Image" class="rounded-circle">
             <h5 class="my-3">Product Name: <strong>{{i.product.name}}</strong></h5>
-            <p class="text-muted">Price: <strong>${{i.total_price}}</strong></p>
+            <p class="text-muted">Price: <strong>₹{{i.total_price}}</strong></p>
             <div class="d-flex justify-content-center align-items-center mb-4">
                 <a href="../qty_incri/{{i.pk}}" class="quantity-btn">+</a>
-                <p class="mx-3 my-0"><strong>{{i.quantity}} kg</strong></p>
+                <p class="mx-3 my-0"><strong>{{i.quantity}} pcs</strong></p>
                 <a href="../qty_decri/{{i.pk}}" class="quantity-btn">-</a>
             </div>
             <div>

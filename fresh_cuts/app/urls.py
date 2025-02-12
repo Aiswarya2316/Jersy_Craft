@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import callback
+
 urlpatterns = [
     path('',views.login),
     path('logout/',views.logout),
@@ -38,7 +40,8 @@ urlpatterns = [
     path('search/', views.product_search, name='product_search'),
     path('pro_search/', views.pro_search, name='pro_search'),
     path("payment/<int:id>", views.order_payment, name="payment"),
-    path("razorpay/callback/", views.callback, name="callback"),
+    path("razorpay/callback/", callback, name="razorpay_callback"),  # Ensure the trailing slash
+    # path("razorpay/callback/", views.callback, name="callback"),
 
     # path('submit_feedback/', views.submit_feedback, name='submit_feedback'),
     # path('feedback_list/', views.feedback_list, name='feedback_list'),

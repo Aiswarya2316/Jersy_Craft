@@ -41,9 +41,6 @@ nav-link:hover{
   
 }
 
-
-
-
 /* product */
 .gallery {
   width:300px;
@@ -106,7 +103,7 @@ nav-link:hover{
 <nav id="nav" class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
     <div class="container-fluid">
       <a href="../viewpro" class="logo">
-        <img src="static/logo_new-removebg-preview.png" alt="logo" width="150px">
+        <img src="../static/attachment_117648875.jpg" alt="logo" width="150px">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span class="navbar-toggler-icon"></span>
@@ -143,7 +140,7 @@ nav-link:hover{
       <img src="{{i.image.url}}" alt="Product 1">
       <div class="description">
           <h3>Product : {{i.name}}</h3>
-          <p class="price">price :{{i.price}}</p>
+          <p class="price">price :₹ {{i.price}}</p>
           <p class="quantity">quantity :{{i.quantity}}</p>
           <p class="quantity">category :{{i.category}}</p>
           <a class="btn btn-primary" style="margin: 10px;" href="../shopprodetails/{{i.pk}}">Details</a>
