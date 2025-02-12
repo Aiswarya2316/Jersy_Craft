@@ -111,15 +111,18 @@ class delpro(models.Model):
 
 
 class Feedback(models.Model):
-    user = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='feedbacks')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     shop = models.ForeignKey(Shopreg, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     message = models.TextField()
-    rating = models.IntegerField(default=5)  # 1 to 5 rating
+    rating = models.IntegerField()
     submitted_at = models.DateTimeField(auto_now_add=True)
+    color = models.CharField(max_length=50, blank=True, null=True)  # Store selected color
+    sleeve_type = models.CharField(max_length=50, blank=True, null=True)  # Store sleeve type
 
     def __str__(self):
-        return f"Feedback from {self.user.name}"
+        return f"{self.user.username} - {self.product.name} - {self.rating}★"
+
 
 
 

@@ -446,39 +446,62 @@ h3{
   </h3>
 </div>
 
-<!-- Feedback Form -->
-<div id="feedbackForm" class="container mt-4">
-  <!-- <h1>Feedback</h1> -->
-  {% if messages %}
-  {% for message in messages %}
-  <div class="alert alert-warning alert-dismissible">
-    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    {{ message }}
-  </div>
-  {% endfor %}
-  {% endif %}
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table class="table">
-      <tr>
-        <td><label for="message"><b>Message</b></label></td>
-        <td><input type="text" placeholder="Enter message" name="message" id="message" required></td>
-      </tr>
-      <tr>
-        <td><label for="rating"><b>Rating</b></label></td>
-        <td><input type="number" placeholder="Enter rating" name="rating" id="rating" required></td>
-      </tr>
-      <tr>
-        <td><label for="submitted_at"><b>Submitted At</b></label></td>
-        <td><input type="datetime-local" name="submitted_at" id="submitted_at" required></td>
-      </tr>
-      <tr>
-        <td colspan="2" class="text-center">
-          <button class="btn btn-primary" type="submit">Submit</button>
-        </td>
-      </tr>
-    </table>
-  </form>
+<div id="feedbackForm" class="container mt-4 p-4 border rounded bg-light" style="max-width: 600px; display: none;">
+    <h2 class="text-center mb-3">Feedback</h2>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="custom_name" class="form-label">Custom Name:</label>
+            <input type="text" id="custom_name" name="custom_name" class="form-control" placeholder="Enter your name">
+        </div>
+        
+        <div class="mb-3">
+            <label for="selected_color" class="form-label">Choose Color:</label>
+            <select id="selected_color" name="selected_color" class="form-select">
+                {% for color in colors %}
+                    <option value="{{ color }}">{{ color }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="sleeve_type" class="form-label">Select Sleeve Type:</label>
+            <select id="sleeve_type" name="sleeve_type" class="form-select">
+                {% for option in sleeve_options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="mb-3">
+            <label for="message" class="form-label">Feedback:</label>
+            <textarea id="message" name="message" class="form-control" rows="3" placeholder="Enter your feedback"></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label for="rating" class="form-label">Rating:</label>
+            <input type="number" id="rating" name="rating" class="form-control" min="1" max="5">
+        </div>
+        
+        <div class="mb-3">
+            <label for="submitted_at" class="form-label">Date:</label>
+            <input type="date" id="submitted_at" name="submitted_at" class="form-control">
+        </div>
+        
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
 
 
 

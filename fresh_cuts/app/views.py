@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.contrib.auth.models import User,auth
 import datetime
 from django.conf import settings
-# import razorpay
 from django.db.models import Avg
 import math
 import json
@@ -12,20 +11,9 @@ from django.views.decorators.csrf import csrf_exempt
 import re
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
-# from django.conf import settings
 from django.http import JsonResponse
-# from django.conf import settings
 import razorpay
-# import json
-# from django.views.decorators.csrf import csrf_exempt
 
-
-
-
-
-
-
-# Create your views here.
 
 def get_usr(req):
     data=Register.objects.get(Email=req.session['user'])
@@ -77,17 +65,12 @@ def login(req):
                 except Shopreg.DoesNotExist:
 
                     messages.warning(req, "INVALID INPUT !  ")
-                    
-
-
-        # messages.warning(req, "INVALID INPUT !")
     return render(req,'login.html')
 
 
 
 def logout(req):
     if 'user' in req.session:
-        # req.session.flush()
         del req.session['user']
     if 'admin' in req.session:
         del req.session['admin']
@@ -106,42 +89,33 @@ def register(req):
             phonenumber3=req.POST['phonenumber']
             location4=req.POST['location']
             password5=req.POST['password']
-        # try:
             data=Register.objects.create(name=name1,Email=email2,phonenumber=phonenumber3,location=location4,password=password5)
             data.save()
-             # Validate email
             return redirect(login)
-        # except:
             messages.warning(req, "Email Already Exits , Try Another Email.")
     return render(req,'user/register.html')
 
 
 def shopregister(req):
-
     if req.method=='POST':
         name1=req.POST['name']
         email2=req.POST['Email']
         phonenumber3=req.POST['phonenumber']
         location4=req.POST['location']
         password5=req.POST['password']
-        # try:
         data=Shopreg.objects.create(name=name1,Email=email2,phonenumber=phonenumber3,location=location4,password=password5)
         data.save()
         return redirect(login)
-        # except:
-        #     messages.warning(req, "Email Already Exits , Try Another Email.")
     return render(req,'shop/shopregister.html')
     print(shopregister)
 
 def delregister(req):
-
     if req.method=='POST':
         name1=req.POST['name']
         email2=req.POST['Email']
         phonenumber3=req.POST['phonenumber']
         location4=req.POST['rout']
         password5=req.POST['password']
-    
         try:
             data=delivery.objects.create(name=name1,Email=email2,phonenumber=phonenumber3,rout=location4,password=password5)
             data.save()
@@ -153,31 +127,22 @@ def delregister(req):
 
 
 
-
 def userhome(req):
     if 'user' in req.session:
         data = Product.objects.all().order_by('-shop')[:4]
         data1 = Buy.objects.filter(user=get_usr(req)).order_by('-date_of_buying')[:2]  # Only get the latest 2 orders
         data2 = cart.objects.filter(user=get_usr(req)).order_by('-id')[:2]  # Get the latest 4 cart items
-
         return render(req, 'user/userhome.html', {'data': data, 'data1': data1, 'data2': data2})
     else:
         return redirect(login)
 
 
-
 def adminhome(req):
-    
     return render(req,'admin/adminhome.html')
 
 
-
-
-
 def deliverys(req):
-    
     return render(req,'delivery/deliveryhome.html')
-
 
 
 def addpro(req):
@@ -192,18 +157,14 @@ def addpro(req):
         category=Category.objects.get(pk=category)
         data=Product.objects.create(name=name,discription=discription,price=price,quantity=quantity,offerprice=offerprice,image=image,category=category, shop=get_shop(req))
         data.save()
-    
         return redirect(viewpro)
     category=Category.objects.all()
-    
     return render(req,'shop/addpro.html', {'category':category})
 
  
-    
 def viewpro(req):
     if 'shop' in req.session:
         data=Product.objects.filter(shop=get_shop(req))
-    # data=Product.objects.all()
         return render(req,'shop/viewpro.html',{'data':data}) 
     
 
@@ -223,25 +184,20 @@ def delete(req,id):
     data.delete()
     return redirect(viewpro)
 
-###profile of user
+
 def profile(req):
     if 'user' in req.session:
-        # data=Register.objects.get(Email=req.session['user'])
         return render(req,'user/userprofile.html',{'data':get_usr(req)})
     else:
         return redirect(login)
     
 
-    
-
-###profile update
 def upload(req):
     if 'user' in req.session:
         try:
             data = Register.objects.get(Email=req.session['user'])
         except Register.DoesNotExist:
             return redirect(login)
-
         if req.method == 'POST':
             name = req.POST['name']
             phonenumber = req.POST['phonenumber']
@@ -254,21 +210,19 @@ def upload(req):
             Register.objects.filter(Email=req.session['user']).update(name=name, phonenumber=phonenumber, location=location)
             return redirect(profile)
         return render(req, 'user/updateprofile.html', {'data': data})
-
     else:
-
         return redirect(login)
+
 
 def userviewproduct(req):
     data=Product.objects.all()
     return render(req,'user/userviewproduct.html',{'data':data})
 
-
-
 def prodetails(req, id):
     try:
         data = Product.objects.get(pk=id)
-        colors = ["Red", "Blue", "Green", "Black", "White", "Yellow"]  # Example color options
+        colors = ["Red", "Blue", "Green", "Black", "White", "Yellow"]
+        sleeve_options = ["Sleeve", "Non-Sleeve"]
 
         if req.method == 'POST':
             user = get_usr(req)
@@ -276,28 +230,34 @@ def prodetails(req, id):
             message = req.POST['message']
             rating = req.POST['rating']
             submitted_at = req.POST['submitted_at']
-            custom_name = req.POST.get('custom_name', '')  # Get custom name input
-            selected_color = req.POST.get('selected_color', '')  # Get selected color input
+            custom_name = req.POST.get('custom_name', '')  
+            selected_color = req.POST.get('selected_color', '')  
+            sleeve_type = req.POST.get('sleeve_type', '')  
 
             feedback = Feedback.objects.create(
                 user=user, shop=shop, product=data, 
-                message=message, rating=rating, submitted_at=submitted_at
+                message=message, rating=rating, submitted_at=submitted_at,
+                color=selected_color, sleeve_type=sleeve_type  # Save to DB
             )
             feedback.save()
 
-            # Save customization details (if applicable, you might need a separate model for customized orders)
-
-        return render(req, 'user/prodetails.html', {'data': data, 'colors': colors})
-    
+        return render(req, 'user/prodetails.html', {
+            'data': data, 
+            'colors': colors, 
+            'sleeve_options': sleeve_options
+        })
     except Product.DoesNotExist:
         messages.error(req, "Product not found.")
         return redirect(userviewproduct)
+
+
 
 
 def products_by_category(request, category_id):
     category = Category.objects.get(pk=id)
     products = Product.objects.filter(category=category)
     return render(request, 'user/userviewproduct.html', {'category': category, 'products': products})
+
 
 def shopprodetails(req,id):
     data=Product.objects.get(pk=id)
@@ -323,15 +283,19 @@ def user_cart(req,id):
     else:
         return redirect(login)
     
+
 def user_view_cart(req):
     if 'user' in req.session:
         data=cart.objects.filter(user=get_usr(req))
         return render(req,'user/addtocart.html',{'data':data})
+    
+
 def qty_incri(req,id):
     data=cart.objects.get(pk=id)
     data.quantity+=1
     data.save()
     return redirect(user_view_cart)
+
 
 def qty_decri(req,id):
     data=cart.objects.get(pk=id)
@@ -339,6 +303,7 @@ def qty_decri(req,id):
         data.quantity-=1
         data.save()
     return redirect(user_view_cart)
+
 
 def buynow1(req,id):
     if 'user' in req.session:
@@ -351,6 +316,7 @@ def buynow1(req,id):
         order.save()
     return redirect(orderdetails)
 
+
 def buynow(req,id):
      if 'user' in req.session:
         cart_product=cart.objects.get(pk=id)
@@ -361,9 +327,9 @@ def buynow(req,id):
         price=cart_product.product.price
         order=Buy.objects.create(product=cart_product.product,user=user,quantity=quantity,date_of_buying=date,price=price)
         order.save()
-
         return redirect(user_view_cart)
      
+
 def deleteitem(req,id):
     data=cart.objects.get(pk=id)
     data.delete()
@@ -371,11 +337,8 @@ def deleteitem(req,id):
 
 
 def orderdetails(req):
-    # Fetch the orders for the user and order them by date_of_buying in descending order
     data = Buy.objects.filter(user=get_usr(req))[::-1]
     return render(req, 'user/orderdetails.html', {'data': data})
-
-
 
 
 def viewshop(req):
@@ -384,73 +347,56 @@ def viewshop(req):
 
 
 def aboutus(req):
-    
     return render(req,'user/aboutus.html')
 
+
 def contact(req):
-    
     return render(req,'user/contact.html')
 
+
 def service(req):
-    
     return render(req,'user/service.html')
 
+
 def bookinghistry(req):
-    #  if 'shop' in req.session:
     l=[]
     data=Product.objects.filter(shop=get_shop(req))
     for i in data:
         data1=Buy.objects.filter(product=i)
         l.append(data1)
     print(l)
-    # data1=delivery.objects.all()
     return render(req,'shop/bookinghistry.html',{'data':l})
-
-
 
 
 def product_search(request):
     query = request.GET.get('query') 
     products = []
     if query:
-        products = Product.objects.filter(name__icontains=query)
-        
+        products = Product.objects.filter(name__icontains=query)  
     return render(request, 'user/product_search.html', {'products': products, 'query': query})
+
 
 def pro_search(request):
     query = request.GET.get('query') 
     products = []
     if query:
         products = Product.objects.filter(name__icontains=query)
-        
     return render(request, 'shop/pro_search.html', {'products': products, 'query': query})
 
-
-
-
-#####payment#######
 
 def home(request):
     return render(request, "user/payment.html")
 
 
 def order_payment(request, id):
-    # Fetch the product based on product_id
         product = Product.objects.get (pk=id)
-
         name = product.name
-        amount = product.price  # Get price directly from the product
-
-        # Razorpay client setup
+        amount = product.price  
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-
-        # Create Razorpay order
         razorpay_order = client.order.create(
             {"amount": int(amount) * 100, "currency": "INR", "payment_capture": "1"}
         )
         order_id = razorpay_order["id"]
-
-        # Save the order in the database
         order = Order.objects.create(
             name=name, 
             amount=amount, 
@@ -471,33 +417,23 @@ def order_payment(request, id):
         )
 
         
-    #  return render(request, "user/payment.html", {"product": product})
-
-
-
-
 import json
 import razorpay
 from django.http import JsonResponse
-
 @csrf_exempt
 def callback(request):
     def verify_signature(response_data):
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
         return client.utility.verify_payment_signature(response_data)
-
     print("POST Data:", request.POST)  # Debugging
-
     if "razorpay_signature" in request.POST:
         payment_id = request.POST.get("razorpay_payment_id", "")
         provider_order_id = request.POST.get("razorpay_order_id", "")
         signature_id = request.POST.get("razorpay_signature", "")
-
         order = Order.objects.get(provider_order_id=provider_order_id)
         order.payment_id = payment_id
         order.signature_id = signature_id
         order.save()
-
         if verify_signature(request.POST):  # Fix the condition here
             order.status = PaymentStatus.SUCCESS
             order.save()
@@ -506,7 +442,6 @@ def callback(request):
             order.status = PaymentStatus.FAILURE
             order.save()
             messages.error(request, "Payment failed. Invalid signature.")
-
     else:
         try:
             error_data = json.loads(request.POST.get("error[metadata]", "{}"))
@@ -515,12 +450,10 @@ def callback(request):
         except json.JSONDecodeError:
             payment_id = None
             provider_order_id = None
-
         if provider_order_id:
             order = Order.objects.get(provider_order_id=provider_order_id)
             order.payment_id = payment_id
             order.status = PaymentStatus.FAILURE
             order.save()
             messages.error(request, "Payment failed. Please try again.")
-
     return render(request, "callback.html", {"status": order.status})
