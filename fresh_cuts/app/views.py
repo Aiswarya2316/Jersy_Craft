@@ -110,11 +110,6 @@ def register(req):
             data=Register.objects.create(name=name1,Email=email2,phonenumber=phonenumber3,location=location4,password=password5)
             data.save()
              # Validate email
-            subject = 'Registration details '
-            message = 'Dear user your accound successfully registered ! ur account uname {}  and password {}'.format(name1,password5)
-            from_email = settings.EMAIL_HOST_USER
-            recipient_list = [email2]
-            send_mail(subject, message, from_email, recipient_list,fail_silently=False)
             return redirect(login)
         # except:
             messages.warning(req, "Email Already Exits , Try Another Email.")
@@ -273,19 +268,31 @@ def userviewproduct(req):
 def prodetails(req, id):
     try:
         data = Product.objects.get(pk=id)
-        if req.method=='POST':
-            user=get_usr(req)
-            shop=data.shop
+        colors = ["Red", "Blue", "Green", "Black", "White", "Yellow"]  # Example color options
+
+        if req.method == 'POST':
+            user = get_usr(req)
+            shop = data.shop
             message = req.POST['message']
             rating = req.POST['rating']
             submitted_at = req.POST['submitted_at']
-        
-            feedback=Feedback.objects.create(user=user,shop=shop,product=data,message=message,rating=rating,submitted_at=submitted_at)
+            custom_name = req.POST.get('custom_name', '')  # Get custom name input
+            selected_color = req.POST.get('selected_color', '')  # Get selected color input
+
+            feedback = Feedback.objects.create(
+                user=user, shop=shop, product=data, 
+                message=message, rating=rating, submitted_at=submitted_at
+            )
             feedback.save()
-        return render(req, 'user/prodetails.html', {'data': data})
+
+            # Save customization details (if applicable, you might need a separate model for customized orders)
+
+        return render(req, 'user/prodetails.html', {'data': data, 'colors': colors})
+    
     except Product.DoesNotExist:
         messages.error(req, "Product not found.")
         return redirect(userviewproduct)
+
 
 def products_by_category(request, category_id):
     category = Category.objects.get(pk=id)

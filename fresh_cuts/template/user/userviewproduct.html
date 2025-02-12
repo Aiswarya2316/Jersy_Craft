@@ -198,26 +198,11 @@
 </nav>
 
 <div class="container">
-  <h3>Our Products: {{ category.name }}</h3>
+  <h3>Our Products {{ category.name }}</h3>
 
-  <!-- Dropdown for categories -->
-  <div class="dropdown text-center">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Select Category
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">All</a></li>
-      <li><a class="dropdown-item" href="#">Birds</a></li>
-      <li><a class="dropdown-item" href="#">Animals</a></li>
-      <li><a class="dropdown-item" href="#">Fish</a></li>
-    </ul>
-  </div>
+ 
 
-    <!-- <select name="category">
-    {% for data1 in data %}
-        select<option value="{{ data1.category }}">{{ data1.category }}</option>
-    {% endfor %}
-</select> -->
+    
 
   <!-- Product Grid -->
   <div class="row">
@@ -227,7 +212,7 @@
         <img src="{{ i.image.url }}" alt="Product {{ i.name }}">
         <div class="card-body">
           <h5>Product: {{ i.name }}</h5>
-          <p class="price">Price: ₹{{ i.price }}/kg</p>
+          <p class="price">Price: ₹{{ i.price }}/pcs</p>
           <div>
             <a href="../prodetails/{{ i.pk }}" class="btn btn-outline-primary">Details</a>
             <a href="../addtocart/{{ i.pk }}" class="btn btn-primary">Add to Cart</a>
