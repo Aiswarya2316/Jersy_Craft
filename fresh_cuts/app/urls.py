@@ -37,6 +37,7 @@ urlpatterns = [
     path('contact/',views.contact),
     path('service/',views.service),
     path('bookinghistry/',views.bookinghistry),
+    path('bookinghistory/',views.bookinghistory),
     path('search/', views.product_search, name='product_search'),
     path('pro_search/', views.pro_search, name='pro_search'),
     path("payment/<int:id>", views.order_payment, name="payment"),

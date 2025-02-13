@@ -132,7 +132,7 @@
                     <li class="nav-item"><a class="nav-link" href="../user_view_cart">My Cart</a></li>
                     <li class="nav-item"><a class="nav-link" href="../aboutus">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="../service">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../Bookinghistory">Bookinghistory</a></li>
                     <li class="nav-item"><a class="nav-link" href="../profile">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
                 </ul>
@@ -146,7 +146,7 @@
 
     <!-- Order Details -->
     
-      <h2>Order Details</h2>
+      <h2>Order List</h2>
 
       <table class="table">
         <thead>
@@ -156,7 +156,7 @@
                 <th>Price</th>
                 <th>Color</th>
                 <th>Sleeve Type</th>
-                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -167,7 +167,7 @@
                 <td>₹{{ order.price }}</td>
                 <td>{{ order.color }}</td>  <!-- Show selected color -->
                 <td>{{ order.sleeve_type }}</td>  <!-- Show selected sleeve type -->
-                <td>{{ order.delivery_status }}</td>
+                <td><a class="pro" href="../payment/{{order.product.pk}}">Buy Now</a></td>
             </tr>
             {% endfor %}
         </tbody>

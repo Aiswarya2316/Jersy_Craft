@@ -110,29 +110,43 @@ class Feedback(models.Model):
 
 
 
+# class Order(models.Model):
+#     user = models.ForeignKey(Register, on_delete=models.CASCADE, null=True, blank=True)  # Link to user
+#     name = models.CharField(max_length=254, blank=False, null=False)
+#     amount = models.FloatField(null=False, blank=False)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     status = models.CharField(
+#         default=PaymentStatus.PENDING, 
+#         max_length=254, 
+#         blank=False, 
+#         null=False
+#     )
+#     provider_order_id = models.CharField(max_length=40, null=False, blank=False)
+#     payment_id = models.CharField(max_length=36, null=False, blank=False)
+#     signature_id = models.CharField(max_length=128, null=False, blank=False)
+
+#     def __str__(self):
+#         return f"{self.id} - {self.user.name if self.user else 'Unknown'} - {self.status}"
+
+
 class Order(models.Model):
-    name = CharField(_("Customer Name"), max_length=254, blank=False, null=False)
-    amount = models.FloatField(_("Amount"), null=False, blank=False)
-    product=models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = CharField(
-        _("Payment Status"),
-        default=PaymentStatus.PENDING,
-        max_length=254,
-        blank=False,
-        null=False,
-    )
-    provider_order_id = models.CharField(
-        _("Order ID"), max_length=40, null=False, blank=False
-    )
-    payment_id = models.CharField(
-        _("Payment ID"), max_length=36, null=False, blank=False
-    )
-    signature_id = models.CharField(
-        _("Signature ID"), max_length=128, null=False, blank=False
+    user = models.ForeignKey(Register, on_delete=models.CASCADE)  # 🔥 Add this line
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    provider_order_id = models.CharField(max_length=255, unique=True)
+    payment_id = models.CharField(max_length=255, blank=True, null=True)
+    signature_id = models.CharField(max_length=255, blank=True, null=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ("PENDING", "Pending"),
+            ("SUCCESS", "Success"),
+            ("FAILURE", "Failure"),
+        ],
+        default="PENDING",
     )
 
-    def __str__(self):
-        return f"{self.id}-{self.name}-{self.status}"
 
 
 

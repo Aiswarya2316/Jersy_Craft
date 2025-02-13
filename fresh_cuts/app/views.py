@@ -430,77 +430,106 @@ def pro_search(request):
         products = Product.objects.filter(name__icontains=query)
     return render(request, 'shop/pro_search.html', {'products': products, 'query': query})
 
+def bookinghistory(req):
+    if 'user' in req.session:
+        user = get_usr(req)  # Get the logged-in user
+        
+        # Fetch direct purchases from Buy model
+        buy_orders = Buy.objects.filter(user=user)
+
+        # Fetch successful Razorpay orders
+        successful_orders = Order.objects.filter(user=user, status="SUCCESS")
+        user = Register.objects.first()  # Get any user
+        orders = Order.objects.filter(user=user, status="SUCCESS")
+
+        print(orders) 
+
+        print("User:", user)  # Debugging
+        print("Successful Orders:", successful_orders)  # Debugging output
+
+        return render(req, 'user/bookinghistory.html', {
+            'buy_orders': buy_orders, 
+            'successful_orders': successful_orders
+        })
+    else:
+        return redirect(login)
+
+
+
+
+
 
 def home(request):
     return render(request, "user/payment.html")
 
-
 def order_payment(request, id):
-        product = Product.objects.get (pk=id)
-        name = product.name
-        amount = product.price  
-        client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
-        razorpay_order = client.order.create(
-            {"amount": int(amount) * 100, "currency": "INR", "payment_capture": "1"}
-        )
-        order_id = razorpay_order["id"]
-        order = Order.objects.create(
-            name=name, 
-            amount=amount, 
-            provider_order_id=order_id,
-            product=product
-        )
-        order.save()
+    if "user" not in request.session:
+        return redirect(login)  # Ensure user is logged in
 
-        return render(
-            request,
-            "user/payment.html",
-            {
-            "callback_url": "http://127.0.0.1:8000/razorpay/callback/",  # Add the trailing slash
-            "razorpay_key": settings.RAZORPAY_KEY_ID,
-            "order": order,
-            "product": product,
-            },
-        )
+    user = get_usr(request)  # 🔥 Get the logged-in user correctly
+
+    product = Product.objects.get(pk=id)
+    name = product.name
+    amount = product.price  
+
+    client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+    razorpay_order = client.order.create(
+        {"amount": int(amount) * 100, "currency": "INR", "payment_capture": "1"}
+    )
+    
+    order_id = razorpay_order["id"]
+    
+    # 🔥 Ensure user is set in the Order
+    order = Order.objects.create(
+        user=user,  # ✅ Ensure user is stored
+        name=name,
+        amount=amount,
+        provider_order_id=order_id,
+        product=product
+    )
+    order.save()
+
+    return render(request, "user/payment.html", {
+        "callback_url": "http://127.0.0.1:8000/razorpay/callback/",  
+        "razorpay_key": settings.RAZORPAY_KEY_ID,
+        "order": order,
+        "product": product,
+    })
+
+
 
         
-import json
-import razorpay
-from django.http import JsonResponse
 @csrf_exempt
 def callback(request):
     def verify_signature(response_data):
         client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
         return client.utility.verify_payment_signature(response_data)
+
     print("POST Data:", request.POST)  # Debugging
     if "razorpay_signature" in request.POST:
-        payment_id = request.POST.get("razorpay_payment_id", "")
         provider_order_id = request.POST.get("razorpay_order_id", "")
+        payment_id = request.POST.get("razorpay_payment_id", "")
         signature_id = request.POST.get("razorpay_signature", "")
-        order = Order.objects.get(provider_order_id=provider_order_id)
-        order.payment_id = payment_id
-        order.signature_id = signature_id
-        order.save()
-        if verify_signature(request.POST):  # Fix the condition here
-            order.status = PaymentStatus.SUCCESS
-            order.save()
-            messages.success(request, "Payment successful! Your order has been placed.")
-        else:
-            order.status = PaymentStatus.FAILURE
-            order.save()
-            messages.error(request, "Payment failed. Invalid signature.")
-    else:
+
         try:
-            error_data = json.loads(request.POST.get("error[metadata]", "{}"))
-            payment_id = error_data.get("payment_id")
-            provider_order_id = error_data.get("order_id")
-        except json.JSONDecodeError:
-            payment_id = None
-            provider_order_id = None
-        if provider_order_id:
             order = Order.objects.get(provider_order_id=provider_order_id)
             order.payment_id = payment_id
-            order.status = PaymentStatus.FAILURE
-            order.save()
-            messages.error(request, "Payment failed. Please try again.")
+            order.signature_id = signature_id
+            
+            print("Order Found:", order)  # Debugging
+
+            if verify_signature(request.POST):
+                order.status = "SUCCESS"  # Ensure correct status update
+                order.save()
+                print("Order Updated to SUCCESS")  # Debugging
+                messages.success(request, "Payment successful! Your order has been placed.")
+            else:
+                order.status = "FAILURE"
+                order.save()
+                print("Signature Verification Failed")  # Debugging
+                messages.error(request, "Payment failed. Invalid signature.")
+        except Order.DoesNotExist:
+            print("Order not found for provider_order_id:", provider_order_id)  # Debugging
+
     return render(request, "callback.html", {"status": order.status})
+
