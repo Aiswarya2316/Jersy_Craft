@@ -65,8 +65,9 @@ class Buy(models.Model):
     quantity = models.IntegerField()
     date_of_buying = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    color = models.CharField(max_length=50, null=True, blank=True)  # Store color
+    sleeve_type = models.CharField(max_length=50, null=True, blank=True)  # Store sleeve type
 
-    # New field for delivery status
     DELIVERY_STATUS_CHOICES = [
         ("Pending", "Pending"),
         ("Shipped", "Shipped"),
@@ -77,22 +78,10 @@ class Buy(models.Model):
         max_length=20, choices=DELIVERY_STATUS_CHOICES, default="Pending"
     )
 
-    # Optional: define a string representation for clarity in admin
     def __str__(self):
-        return f"{self.product.name} - {self.delivery_status}"
-    
-class Product_quantity(models.Model):
-    productid = models.IntegerField()
-    shopid = models.IntegerField()
-    quantity = models.IntegerField()
-
-    def __str__(self):
-        return self.productid
+        return f"{self.product.name} - {self.color} - {self.sleeve_type} - {self.delivery_status}"
     
 
-class Payment_status(models.Model):
-        transactionid = models.IntegerField()
-        amount = models.IntegerField()
 
 class delivery(models.Model):
     rout = models.TextField()
@@ -103,25 +92,20 @@ class delivery(models.Model):
     def __str__(self):
         return self.name
 
-class delpro(models.Model):
-    delivery=models.ForeignKey(delivery,on_delete=models.CASCADE)
-    buy=models.ForeignKey(Buy,on_delete=models.CASCADE)
-    status=models.BooleanField(default=False)
-    date=models.TextField(null=True) 
+
 
 
 class Feedback(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Register, on_delete=models.CASCADE)  # Change User to Register
     shop = models.ForeignKey(Shopreg, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     message = models.TextField()
     rating = models.IntegerField()
     submitted_at = models.DateTimeField(auto_now_add=True)
-    color = models.CharField(max_length=50, blank=True, null=True)  # Store selected color
-    sleeve_type = models.CharField(max_length=50, blank=True, null=True)  # Store sleeve type
 
     def __str__(self):
-        return f"{self.user.username} - {self.product.name} - {self.rating}★"
+        return f"{self.user.name} - {self.product.name} - {self.rating}★"
+
 
 
 

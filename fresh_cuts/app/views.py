@@ -230,14 +230,11 @@ def prodetails(req, id):
             message = req.POST['message']
             rating = req.POST['rating']
             submitted_at = req.POST['submitted_at']
-            custom_name = req.POST.get('custom_name', '')  
-            selected_color = req.POST.get('selected_color', '')  
-            sleeve_type = req.POST.get('sleeve_type', '')  
+             
 
             feedback = Feedback.objects.create(
                 user=user, shop=shop, product=data, 
-                message=message, rating=rating, submitted_at=submitted_at,
-                color=selected_color, sleeve_type=sleeve_type  # Save to DB
+                message=message, rating=rating, submitted_at=submitted_at  # Save to DB
             )
             feedback.save()
 
@@ -267,27 +264,31 @@ def shopprodetails(req,id):
     return render(req,'shop/shopprodetails.html',{'data':data,'feedback':feedback,'average_rating': rounded_average_rating})
 
 
-def user_cart(req,id):
+def user_cart(req, id):
     if 'user' in req.session:
-        product=Product.objects.get(pk=id)
-        user=get_usr(req)
-        qty=1
+        product = Product.objects.get(pk=id)
+        user = get_usr(req)
+        qty = 1
         try:
-            dtls=cart.objects.get(product=product,user=user)
-            dtls.quantity+=1
+            dtls = cart.objects.get(product=product, user=user)
+            dtls.quantity += 1  # Increment quantity
             dtls.save()
-        except:
-            data=cart.objects.create(product=product,user=user,quantity=qty)
-            data.save()
+        except cart.DoesNotExist:
+            cart.objects.create(product=product, user=user, quantity=qty)
+
         return redirect(user_view_cart)
     else:
         return redirect(login)
+
     
 
 def user_view_cart(req):
     if 'user' in req.session:
-        data=cart.objects.filter(user=get_usr(req))
-        return render(req,'user/addtocart.html',{'data':data})
+        data = cart.objects.filter(user=get_usr(req))
+        return render(req, 'user/addtocart.html', {'data': data})
+    else:
+        return redirect(login)  # Ensure it redirects if user is not logged in
+
     
 
 def qty_incri(req,id):
@@ -305,30 +306,71 @@ def qty_decri(req,id):
     return redirect(user_view_cart)
 
 
-def buynow1(req,id):
+import datetime
+
+def buynow1(req, id):
     if 'user' in req.session:
-        product=Product.objects.get(pk=id)
-        user=get_usr(req)
-        quantity=1
-        date=datetime.datetime.now().strftime("%x")
-        price=product.price
-        order=Buy.objects.create(product=product,user=user,quantity=quantity,date_of_buying=date,price=price)
+        product = Product.objects.get(pk=id)
+        user = get_usr(req)
+        quantity = 1
+        date = datetime.datetime.now().strftime("%x")
+        price = product.price
+
+        # Get selected color and sleeve type from request
+        selected_color = req.GET.get("color", "")  
+        selected_sleeve = req.GET.get("sleeve", "")  
+
+        # Create the order with selected options
+        order = Buy.objects.create(
+            product=product,
+            user=user,
+            quantity=quantity,
+            date_of_buying=date,
+            price=price,
+            color=selected_color,
+            sleeve_type=selected_sleeve
+        )
         order.save()
+
     return redirect(orderdetails)
 
 
-def buynow(req,id):
-     if 'user' in req.session:
-        cart_product=cart.objects.get(pk=id)
-        product=cart_product.product
-        user=get_usr(req)
-        quantity=cart_product.quantity
-        date=datetime.datetime.now().strftime("%x")
-        price=cart_product.product.price
-        order=Buy.objects.create(product=cart_product.product,user=user,quantity=quantity,date_of_buying=date,price=price)
-        order.save()
-        return redirect(user_view_cart)
-     
+
+import datetime
+
+def buynow(req):
+    if 'user' in req.session:
+        user = get_usr(req)
+        cart_items = cart.objects.filter(user=user)
+
+        if not cart_items.exists():
+            return redirect(user_view_cart)  # Redirect if cart is empty
+
+        date = datetime.datetime.now().strftime("%x")
+        total_price = sum(item.total_price() for item in cart_items)  # Calculate total price
+        amount_in_paise = int(total_price * 100)  # ✅ Convert to paise (integer)
+
+        # Create an order entry
+        order = Order.objects.create(
+            name=user.name,
+            amount=total_price,  # Store amount in INR
+            provider_order_id="TEMP_ORDER_ID",  # Update after Razorpay order creation
+            payment_id="",
+            signature_id="",
+            status="Pending"
+        )
+
+        return render(req, 'user/payment.html', {
+            'cart_items': cart_items,
+            'total_price': total_price,
+            'amount_in_paise': amount_in_paise,  # ✅ Pass amount in paise
+            'order': order
+        })
+    else:
+        return redirect(login)
+
+
+
 
 def deleteitem(req,id):
     data=cart.objects.get(pk=id)
@@ -337,8 +379,13 @@ def deleteitem(req,id):
 
 
 def orderdetails(req):
-    data = Buy.objects.filter(user=get_usr(req))[::-1]
-    return render(req, 'user/orderdetails.html', {'data': data})
+    if 'user' in req.session:
+        user = get_usr(req)
+        orders = Buy.objects.filter(user=user).order_by('-id')  # Fetch user's orders
+        return render(req, "user/orderdetails.html", {"orders": orders})
+    else:
+        return redirect(login)
+
 
 
 def viewshop(req):

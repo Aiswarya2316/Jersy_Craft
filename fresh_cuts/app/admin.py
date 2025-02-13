@@ -6,7 +6,6 @@ from .models import *
 admin.site.register(Product)
 admin.site.register(cart)
 admin.site.register(Buy)
-admin.site.register(Product_quantity)
 admin.site.register(Category)
 admin.site.register(Register)
 

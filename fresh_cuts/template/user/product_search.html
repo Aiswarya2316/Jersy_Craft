@@ -188,23 +188,11 @@
                       <p class="price">{{ product.description }}</p>
                       <p class="price">price:₹{{product.price}}</p>
                       <p class="quantity">qty:{{product.quantity}}pcs</p>
-                      <a class="pro" href="../prodetails/{{i.pk}}">Details</a>
-                      <a class="pro" href="../addtocart/{{i.pk}}">Add to cart</a>
+                      <a class="pro" href="../prodetails/{{product.pk}}">Details</a>
+                      <a class="pro" href="../addtocart/{{product.pk}}">Add to cart</a>
                   </div>
               </div>  
             </div>
-                <!-- <div class="col-md-4 gallery">
-                    <div class="product">
-                        <img src="{{ product.image.url }}" alt="Product Image" width="50%">
-                        <div class="description">
-                            <h3>{{ product.name }}</h3>
-                            <p class="price">{{ product.description }}</p>
-                            <p class="quantity">Quantity: {{ product.quantity }}</p>
-                            <a class="pro" href="../prodetails/{{ product.pk }}">Details</a>
-                            <a class="pro" href="../addtocart/{{ product.pk }}">Add to cart</a>
-                        </div>
-                    </div>
-                </div> -->
             {% endfor %}
         </div>
     {% else %}

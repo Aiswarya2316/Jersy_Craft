@@ -148,23 +148,30 @@
     
       <h2>Order Details</h2>
 
-    {% for i in data %}
-    <div class="order-container">
-
-        <div class="order-row">
-            <div class="order-image">
-                <img src="{{i.product.image.url}}" alt="{{i.product.name}}">
-            </div>
-            <div class="order-details">
-                <p><strong>Product Name:</strong> {{i.product.name}}</p>
-                <p><strong>Quantity:</strong> {{i.quantity}}</p>
-                <p><strong>Order Date:</strong> {{i.date_of_buying}}</p>
-                <p><strong>Shipping Address:</strong> {{i.user.location}}</p>
-                <p><strong>Delivery Status:</strong> {{i.delivery_status}}</p>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-
+      <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Color</th>
+                <th>Sleeve Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.product.name }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>₹{{ order.price }}</td>
+                <td>{{ order.color }}</td>  <!-- Show selected color -->
+                <td>{{ order.sleeve_type }}</td>  <!-- Show selected sleeve type -->
+                <td>{{ order.delivery_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
 </body>
 </html>

@@ -1,509 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% load static %}
   <title>Fresh Cuts</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>
-
-#nav{
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-          height: 80px;
-          margin: -20px -20px-20px 0;
-          
-        }
-        .navbar .nav-link:hover {
-            color: #ffdd57; /* Change color on hover */
-        }
-      .profile {
-          margin-left: 20px;
-      }
-      .dropdown-menu{
-          margin-left: -100px;
-      }
-        /* Basic Styling */
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-}
- 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 15px;
-  display: flex;
-}
-/* Columns */
-.left-column {
-  width: 65%;
-  position: relative;
-}
- 
-.right-column {
-  width: 35%;
-  margin-top: 60px;
-}
-/* Left Column */
-.left-column img {
-  /* width: 100%; */
-  padding-top: 20px;
-  margin-left: -50px;
-  padding-bottom: 50px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  max-width: 700px;
-  max-height: 700px;
-  min-width: 700px;
-  min-height: 700px;
-  transition: all 0.3s ease;
-}
- 
-.left-column img.active {
-  opacity: 1;
-}
-/* Product Description */
-.product-description {
-  border-bottom: 1px solid #E1E8EE;
-  margin-bottom: 20px;
-}
-.product-description span {
-  font-size: 12px;
-  color: #358ED7;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-.product-description h1 {
-  font-weight: 300;
-  font-size: 52px;
-  color: #43484D;
-  letter-spacing: -2px;
-}
-.product-description p {
-  font-size: 16px;
-  font-weight: 300;
-  color: #86939E;
-  line-height: 24px;
-}
-/* Product Color */
-.product-color {
-  margin-bottom: 30px;
-}
- 
-.color-choose div {
-  display: inline-block;
-}
- 
-.color-choose input[type="radio"] {
-  display: none;
-}
- 
-.color-choose input[type="radio"] + label span {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  margin: -1px 4px 0 0;
-  vertical-align: middle;
-  cursor: pointer;
-  border-radius: 50%;
-  border: 2px solid #FFFFFF;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33);
-}
- 
-.color-choose input[type="radio"]#red + label span {
-  background-color: #C91524;
-}
-.color-choose input[type="radio"]#blue + label span {
-  background-color: #314780;
-}
-.color-choose input[type="radio"]#black + label span {
-  background-color: #323232;
-}
- 
-.color-choose input[type="radio"]:checked + label span {
-  background-image: url(images/check-icn.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-}
-/* Cable Configuration */
-.cable-choose {
-  margin-bottom: 20px;
-}
- 
-.cable-choose button {
-  border: 2px solid #E1E8EE;
-  border-radius: 6px;
-  padding: 13px 20px;
-  font-size: 14px;
-  color: #5E6977;
-  background-color: #fff;
-  cursor: pointer;
-  transition: all .5s;
-}
- 
-.cable-choose button:hover,
-.cable-choose button:active,
-.cable-choose button:focus {
-  border: 2px solid #86939E;
-  outline: none;
-}
- 
-.cable-config {
-  border-bottom: 1px solid #E1E8EE;
-  margin-bottom: 20px;
-}
- 
-.cable-config a {
-  color: #358ED7;
-  text-decoration: none;
-  font-size: 12px;
-  position: relative;
-  margin: 10px 0;
-  display: inline-block;
-}
- 
-.cable-config a:before {
-  content: "?";
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  border: 2px solid rgba(53, 142, 215, 0.5);
-  display: inline-block;
-  text-align: center;
-  line-height: 16px;
-  opacity: 0.5;
-  margin-right: 5px;
-}
-/* Product Price */
-.product-price {
-  display: flex;
-  align-items: center;
-}
- 
-.product-price span {
-  font-size: 26px;
-  font-weight: 300;
-  color: #43474D;
-  margin-right: 20px;
-}
- 
-.cart-btn {
-  display: inline-block;
-  background-color: #7DC855;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  margin-right: 40px;
-  padding: 12px 30px;
-  transition: all .5s;
-}
-.cart-btn:hover {
-  background-color: #64af3d;
-}
-
-
-.nav-link:hover{
-        color: rgb(222, 247, 34);
+    :root {
+      --primary-color: #2c3e50;
+      --accent-color: #3498db;
+      --text-color: #2c3e50;
+      --light-gray: #f8f9fa;
+      --border-radius: 8px;
     }
 
-
-
-    /* .navbar {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
-} */
-
-.navbar .nav-link {
-  transition: color 0.3s; /* Smooth transition for hover effect */
-}
-
-.navbar .nav-link:hover {
-  color: #ffdd57; /* Change color on hover */
-}
-
-.navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.5); /* Light border for toggler */
-}
-
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* Custom color for toggler icon */
-}
-#nav{
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  height: 80px;
-  margin: -20px -20px-20px 0;
-}
-
-table{
-  /* padding-right: 100px; */
-  width:20px;
-  height: 50px;
-  margin-right: 40px;
-  /* margin-top: 100px; */
-  margin-left: 700px;
-}
-#feedbackForm{
-  width:20px;
-  height: 50px;
-  margin-right: 40px;
-  /* margin-top: 100px; */
-  margin-left: 200px;
-}
-
-h3{
-  text-align: right;
-  color: #C91524;
-  margin-right: 300px;
-}
-
-#feedbtn{
-  margin-left: 100px;
-}
-
-
-
-#feedbackForm {
-      display: none; /* Hide feedback form initially */
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-color);
+      background-color: #fff;
     }
 
-/* Responsive */
-@media only screen and (max-width: 992px) {
-        #mynavbar {
-          background-color: #2c2727;
-          padding: 10px;
-        }
-        table{
- 
-          margin-left: 0px;
-        }
-
+    .navbar {
+      background-color: var(--primary-color) !important;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
+    .navbar .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+    }
 
-/* Responsive Design for Medium and Small Screens */
-@media (max-width: 940px) {
-  .container {
-    margin: top -400px;
-    display: flex;
-    flex-direction: column; /* Stack columns vertically */
-    align-items: center; /* Center-align content */
-  }
+    .navbar .nav-link:hover {
+      color: var(--accent-color) !important;
+      transform: translateY(-2px);
+    }
 
-  .left-column,
-  .right-column {
-    width: 100%; /* Take full width */
-  }
+    .product-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
 
-  .left-column img {
-    position: relative; /* Reset positioning */
-    width: 80%; /* Adjust width for better fit */
-    margin: 0 auto; /* Center the image horizontally */
-    min-width: 100%;
-    min-height: 100%;
-  }
+    .product-image {
+      width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      transition: transform 0.3s ease;
+    }
 
-  .right-column {
-    margin-top: 20px; /* Add spacing between the columns */
-  }
-}
+    .product-image:hover {
+      transform: scale(1.02);
+    }
 
-@media (max-width: 535px) {
-  .left-column img {
-    width: 90%; /* Further reduce image size for small screens */
-  }
+    .product-details {
+      padding: 2rem;
+    }
 
-  .right-column {
-    margin-top: 15px; /* Adjust spacing for smaller screens */
-  }
-  table{
-  margin-left: -100px;
-}
+    .category-badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: var(--accent-color);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
 
-}
+    .product-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
 
-    </style>
-    <script>
-      // JavaScript function to toggle the feedback form visibility
-      function toggleFeedbackForm() {
-        const feedbackForm = document.getElementById("feedbackForm");
-        feedbackForm.style.display = feedbackForm.style.display === "block" ? "none" : "block";
+    .product-description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    .price-tag {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .offer-section {
+      background-color: var(--light-gray);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      margin-bottom: 2rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-color);
+      border: none;
+      padding: 0.8rem 2rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    }
+
+    .feedback-form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .form-control, .form-select {
+      border: 1px solid #dee2e6;
+      padding: 0.8rem;
+      border-radius: var(--border-radius);
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+    }
+
+    @media (max-width: 768px) {
+      .product-details {
+        padding: 1rem;
       }
-    </script>
+      
+      .product-title {
+        font-size: 2rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-<nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  <div class="container-fluid">
-    <a href="../userhome" class="logo">
-      <img src="../static/attachment_117648875.jpg" alt="logo" width="80px">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mynavbar">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="../userviewproduct">View Products</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../orderdetails">Order Details</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../user_view_cart">My Cart</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../aboutus">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../service">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../contact">Contact</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../logout">Logout</a>
-        </li>
-      </ul>
-          
-      <form class="d-flex" method="get" action="{% url 'product_search' %}">
-        <input class="form-control me-2"  type="text" name="query" placeholder="Search for products...">
-        <button class="btn btn-primary" type="submit">Search</button>
-    </form>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a href="../userhome" class="navbar-brand">
+        <img src="../static/attachment_117648875.jpg" alt="Fresh Cuts" width="80">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="../userviewproduct">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="../orderdetails">Orders</a></li>
+          <li class="nav-item"><a class="nav-link" href="../user_view_cart">Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="../aboutus">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="../service">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="../contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profile">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="../logout">Logout</a></li>
+        </ul>
+        <form class="d-flex" method="get" action="{% url 'product_search' %}">
+          <input class="form-control me-2" type="text" name="query" placeholder="Search products...">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
     </div>
+  </nav>
+
+  <div class="product-container">
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{{data.image.url}}" alt="{{data.name}}" class="product-image">
+        </div>
+        <div class="col-lg-6 product-details">
+            <span class="category-badge">{{data.category}}</span>
+            <h1 class="product-title">{{data.name}}</h1>
+            <p class="product-description">{{data.discription}}</p>
+            <div class="offer-section">
+              <h5 class="mb-3">Available Offers</h5>
+              <p class="mb-2">Original Price: ₹{{data.price}}</p>
+              <p class="mb-2">Quantity Available: {{data.quantity}} pcs</p>
+              <div class="price-tag">Offer Price: ₹{{data.offerprice}}</div>
+          </div>
+
+            <div class="mb-3">
+              <strong>Available Colors:</strong>
+              <select id="selectedColor" class="form-select">
+                  {% for color in colors %}
+                      <option value="{{ color }}">{{ color }}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          
+          <div class="mb-3">
+              <strong>Sleeve Type:</strong>
+              <select id="selectedSleeve" class="form-select">
+                  {% for option in sleeve_options %}
+                      <option value="{{ option }}">{{ option }}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          
+          <div class="action-buttons">
+              <a id="buyNowLink" href="../buynow1/{{data.pk}}" class="btn btn-primary">Buy Now</a>
+              <a id="addToCartLink" href="../addtocart/{{ data.pk }}" class="btn btn-outline-primary">Add to Cart</a>
+          </div>
+          
+            
+
+            
+        </div>
+    </div>
+</div>
+
+  <div class="text-center mb-4">
+    <button class="btn btn-primary" onclick="toggleFeedbackForm()">FeedBack</button>
   </div>
-</nav>
 
-
-<!-- pro_display -->
-    <main class="container">
- 
-        <!-- Left Column / Headphones Image -->
-        <div class="left-column">
-          <img data-image="red" class="active" src="{{data.image.url}}" alt="">
-        </div>
-       
-       
-        <!-- Right Column -->
-        <div class="right-column">
-       
-          <!-- Product Description -->
-          <div class="product-description">
-            <span>{{data.category}}</span>
-            <h1>{{data.name}}</h1>
-            <p>{{data.discription}}</p>
-          </div>
-       
-          <!-- Product Configuration -->
-          <div class="product-configuration">
-          
-            
-            <h5>
-              Avialable offers
-            </h5>
-            <div class="cable-config">
-              <p>price : ₹{{data.price}}</p>
-              <p>quantity : {{data.quantity}}pcs</p>
-              <h4>Offer price : {{data.offerprice}}</h4>
-             
-            </div>
-          </div>
-       
-          <!-- Product Pricing -->
-          <div class="product-price">
-            
-            <!-- <span>Offer price : {{data.offerprice}}</span> -->
-            <a href="../buynow1/{{data.pk}}" class="cart-btn">Buy now</a>
-            <a href="../user_view_cart" class="cart-btn">Add to cart</a>
-          </div>
-        </div>
-      </main>
-    <script>
-        $(document).ready(function() {
- 
- $('.color-choose input').on('click', function() {
-     var headphonesColor = $(this).attr('data-image');
-
-     $('.active').removeClass('active');
-     $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
-     $(this).addClass('active');
- });
-
-});
-    </script>
-
-<div>
-  <h3>
-    <a href="javascript:void(0)" id="feedbtn" class="btn btn-primary" onclick="toggleFeedbackForm()">Feedback</a>
-  </h3>
-</div>
-
-<div id="feedbackForm" class="container mt-4 p-4 border rounded bg-light" style="max-width: 600px; display: none;">
-    <h2 class="text-center mb-3">Feedback</h2>
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    {% endfor %}
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        
-        <div class="mb-3">
-            <label for="custom_name" class="form-label">Custom Name:</label>
-            <input type="text" id="custom_name" name="custom_name" class="form-control" placeholder="Enter your name">
-        </div>
-        
-        <div class="mb-3">
-            <label for="selected_color" class="form-label">Choose Color:</label>
-            <select id="selected_color" name="selected_color" class="form-select">
-                {% for color in colors %}
-                    <option value="{{ color }}">{{ color }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        
-        <div class="mb-3">
-            <label for="sleeve_type" class="form-label">Select Sleeve Type:</label>
-            <select id="sleeve_type" name="sleeve_type" class="form-select">
-                {% for option in sleeve_options %}
-                    <option value="{{ option }}">{{ option }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        
-        <div class="mb-3">
-            <label for="message" class="form-label">Feedback:</label>
-            <textarea id="message" name="message" class="form-control" rows="3" placeholder="Enter your feedback"></textarea>
-        </div>
-        
-        <div class="mb-3">
-            <label for="rating" class="form-label">Rating:</label>
-            <input type="number" id="rating" name="rating" class="form-control" min="1" max="5">
-        </div>
-        
-        <div class="mb-3">
-            <label for="submitted_at" class="form-label">Date:</label>
-            <input type="date" id="submitted_at" name="submitted_at" class="form-control">
-        </div>
-        
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+  <div class="container feedback-form">
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table class="table table-bordered">
+        <tr>
+          <td><label for="message">Message</label></td>
+          <td><input type="text" class="form-control" name="message" id="message" required></td>
+        </tr>
+        <tr>
+          <td><label for="rating">Rating</label></td>
+          <td><input type="number" class="form-control" name="rating" id="rating" required></td>
+        </tr>
+        <tr>
+          <td><label for="submitted_at">Submitted At</label></td>
+          <td><input type="datetime-local" class="form-control" name="submitted_at" id="submitted_at" required></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button class="btn btn-primary w-100" type="submit">Submit</button></td>
+        </tr>
+      </table>
     </form>
-</div>
+  </div>
+  
+  <script>
+    function toggleFeedbackForm() {
+      const form = document.getElementById("feedbackForm");
+      form.style.display = form.style.display === "block" ? "none" : "block";
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const colorSelect = document.getElementById("selectedColor");
+        const sleeveSelect = document.getElementById("selectedSleeve");
+        const buyNowLink = document.getElementById("buyNowLink");
+        const addToCartLink = document.getElementById("addToCartLink");
 
+        function updateLinks() {
+            const selectedColor = encodeURIComponent(colorSelect.value);
+            const selectedSleeve = encodeURIComponent(sleeveSelect.value);
 
+            buyNowLink.href = `../buynow1/{{data.pk}}?color=${selectedColor}&sleeve=${selectedSleeve}`;
+            addToCartLink.href = `../addtocart/{{data.pk}}?color=${selectedColor}&sleeve=${selectedSleeve}`;
+        }
+
+        colorSelect.addEventListener("change", updateLinks);
+        sleeveSelect.addEventListener("change", updateLinks);
+    });
+</script>
 
 </body>
 </html>
