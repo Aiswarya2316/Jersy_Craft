@@ -185,9 +185,9 @@
 
   <div class="product-container">
     <div class="row">
-        <div class="col-lg-6">
-            <img src="{{data.image.url}}" alt="{{data.name}}" class="product-image">
-        </div>
+      <div class="col-lg-6">
+        <img id="productImage" src="{{ data.image.url }}" alt="{{ data.name }}" class="product-image">
+    </div>
         <div class="col-lg-6 product-details">
             <span class="category-badge">{{data.category}}</span>
             <h1 class="product-title">{{data.name}}</h1>
@@ -199,23 +199,23 @@
               <div class="price-tag">Offer Price: ₹{{data.offerprice}}</div>
           </div>
 
-            <div class="mb-3">
-              <strong>Available Colors:</strong>
-              <select id="selectedColor" class="form-select">
-                  {% for color in colors %}
-                      <option value="{{ color }}">{{ color }}</option>
-                  {% endfor %}
-              </select>
-          </div>
-          
           <div class="mb-3">
-              <strong>Sleeve Type:</strong>
-              <select id="selectedSleeve" class="form-select">
-                  {% for option in sleeve_options %}
-                      <option value="{{ option }}">{{ option }}</option>
-                  {% endfor %}
-              </select>
-          </div>
+            <strong>Available Colors:</strong>
+            <select id="selectedColor" class="form-select">
+                {% for color in colors %}
+                    <option value="{{ color }}">{{ color }}</option>
+                {% endfor %}
+            </select>
+        </div>
+          
+        <div class="mb-3">
+          <strong>Sleeve Type:</strong>
+          <select id="selectedSleeve" class="form-select">
+              {% for option in sleeve_options %}
+                  <option value="{{ option }}">{{ option }}</option>
+              {% endfor %}
+          </select>
+      </div>
           
           <div class="action-buttons">
               <a id="buyNowLink" href="../buynow1/{{data.pk}}" class="btn btn-primary">Order</a>
@@ -281,6 +281,22 @@
         sleeveSelect.addEventListener("change", updateLinks);
     });
 </script>
+<script>
+  let productImages = {{ product_images|safe }};  // Convert Django context to JS array
 
+  function updateProductImage() {
+      let selectedColor = document.getElementById("selectedColor").value;
+      let selectedSleeve = document.getElementById("selectedSleeve").value;
+
+      let newImage = productImages.find(img => img.color === selectedColor && img.sleeve_type === selectedSleeve);
+      
+      if (newImage) {
+          document.getElementById("productImage").src = newImage.image;
+      }
+  }
+
+  document.getElementById("selectedColor").addEventListener("change", updateProductImage);
+  document.getElementById("selectedSleeve").addEventListener("change", updateProductImage);
+</script>
 </body>
 </html>

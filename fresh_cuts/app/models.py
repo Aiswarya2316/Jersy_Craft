@@ -47,7 +47,18 @@ class Product(models.Model):
 
     def _str_(self):
         return self.name +' '+self.shop.name
-    
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
+    color = models.CharField(max_length=50)
+    sleeve_type = models.CharField(max_length=50)  # Added sleeve type
+    image = models.FileField(upload_to="product_images/")
+
+    def __str__(self):
+        return f"{self.product.name} - {self.color} - {self.sleeve_type}"
+
+
+
 class cart(models.Model):
     user = models.ForeignKey(Register,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)

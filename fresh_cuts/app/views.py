@@ -218,30 +218,64 @@ def userviewproduct(req):
     data=Product.objects.all()
     return render(req,'user/userviewproduct.html',{'data':data})
 
+# def prodetails(req, id):
+#     try:
+#         data = Product.objects.get(pk=id)
+#         colors = ["Red", "Blue", "Green", "Black", "White", "Yellow"]
+#         sleeve_options = ["Sleeve", "Non-Sleeve"]
+
+#         if req.method == 'POST':
+#             user = get_usr(req)
+#             shop = data.shop
+#             message = req.POST['message']
+#             rating = req.POST['rating']
+#             submitted_at = req.POST['submitted_at']
+             
+
+#             feedback = Feedback.objects.create(
+#                 user=user, shop=shop, product=data, 
+#                 message=message, rating=rating, submitted_at=submitted_at  # Save to DB
+#             )
+#             feedback.save()
+
+#         return render(req, 'user/prodetails.html', {
+#             'data': data, 
+#             'colors': colors, 
+#             'sleeve_options': sleeve_options
+#         })
+#     except Product.DoesNotExist:
+#         messages.error(req, "Product not found.")
+#         return redirect(userviewproduct)
 def prodetails(req, id):
     try:
         data = Product.objects.get(pk=id)
-        colors = ["Red", "Blue", "Green", "Black", "White", "Yellow"]
-        sleeve_options = ["Sleeve", "Non-Sleeve"]
+        product_images = [
+            {"color": img.color, "sleeve_type": img.sleeve_type, "image": img.image.url}
+            for img in data.images.all()
+        ]
+        print(product_images)
+        colors = list(set([img["color"] for img in product_images]))
+        sleeve_options = list(set([img["sleeve_type"] for img in product_images]))
 
         if req.method == 'POST':
-            user = get_usr(req)
-            shop = data.shop
-            message = req.POST['message']
-            rating = req.POST['rating']
-            submitted_at = req.POST['submitted_at']
-             
+                    user = get_usr(req)
+                    shop = data.shop
+                    message = req.POST['message']
+                    rating = req.POST['rating']
+                    submitted_at = req.POST['submitted_at']
+                    
 
-            feedback = Feedback.objects.create(
-                user=user, shop=shop, product=data, 
-                message=message, rating=rating, submitted_at=submitted_at  # Save to DB
-            )
-            feedback.save()
+                    feedback = Feedback.objects.create(
+                        user=user, shop=shop, product=data, 
+                        message=message, rating=rating, submitted_at=submitted_at  # Save to DB
+                    )
+                    feedback.save()
 
         return render(req, 'user/prodetails.html', {
-            'data': data, 
-            'colors': colors, 
-            'sleeve_options': sleeve_options
+            'data': data,
+            'colors': colors,
+            'sleeve_options': sleeve_options,
+            'product_images': product_images  # Pass as a proper JSON object
         })
     except Product.DoesNotExist:
         messages.error(req, "Product not found.")
