@@ -532,7 +532,13 @@ def order_payment(request, id):
 
 
 
-        
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+import razorpay
+from django.conf import settings
+from django.contrib import messages
+from .models import Order  # Import your Order model
+
 @csrf_exempt
 def callback(request):
     def verify_signature(response_data):
@@ -540,6 +546,9 @@ def callback(request):
         return client.utility.verify_payment_signature(response_data)
 
     print("POST Data:", request.POST)  # Debugging
+
+    order = None  # Initialize order variable
+
     if "razorpay_signature" in request.POST:
         provider_order_id = request.POST.get("razorpay_order_id", "")
         payment_id = request.POST.get("razorpay_payment_id", "")
@@ -549,11 +558,11 @@ def callback(request):
             order = Order.objects.get(provider_order_id=provider_order_id)
             order.payment_id = payment_id
             order.signature_id = signature_id
-            
+
             print("Order Found:", order)  # Debugging
 
             if verify_signature(request.POST):
-                order.status = "SUCCESS"  # Ensure correct status update
+                order.status = "SUCCESS"
                 order.save()
                 print("Order Updated to SUCCESS")  # Debugging
                 messages.success(request, "Payment successful! Your order has been placed.")
@@ -564,6 +573,7 @@ def callback(request):
                 messages.error(request, "Payment failed. Invalid signature.")
         except Order.DoesNotExist:
             print("Order not found for provider_order_id:", provider_order_id)  # Debugging
+            messages.error(request, "Payment failed. Order not found.")
 
-    return render(request, "callback.html", {"status": order.status})
-
+    # Ensure we don't try to access `order.status` if order is None
+    return render(request, "callback.html", {"status": order.status if order else "FAILURE"})
